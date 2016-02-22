@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/main_listview_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shakit 플로팅 위젯 설정"
+        android:textColor="@color/colorPrimary"
+        android:textSize="11sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/profile_main_none" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/main_listview_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="테마 설정"
+                    android:textColor="@color/textColorDark"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/main_listview_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="플로팅 위젯의 테마를  변경할 수 있습니다."
+                    android:textColor="@color/textColorSub"
+                    android:textSize="9sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="트위터 블루"
+                android:textColor="@color/colorPrimary" />
+
+            <com.rey.material.widget.Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center" />
+
+            <TextView
+                android:padding="10dp"
+                android:background="@drawable/round_square_selector"
+                android:layout_gravity="center"
+                android:textColor="@color/textColorSub"
+                android:text="변경"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+    </RelativeLayout>
+</LinearLayout>
