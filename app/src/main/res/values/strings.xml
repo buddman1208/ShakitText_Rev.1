@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ShakitText</string>
+    <string name="tweet">트윗</string>
+    <string name="tweet_hint">무슨 일이 일어나고 있나요?</string>
 </resources>
