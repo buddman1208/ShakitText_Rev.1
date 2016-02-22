@@ -47,30 +47,30 @@ public class DeveloperActivity extends AppCompatActivity {
         arrayList.add(new DeveloperData("Version", getPackageManager().getPackageInfo(getPackageName(), 0).versionName));
         arrayList.add(new DeveloperData("User Support", "kotohana5706@edcan.kr"));
         arrayList.add(new DeveloperData("Homepage", "http://edcan.kr"));
-        arrayList.add(new DeveloperData("Main Programmer", "KOTOHANA (http://malang.moe)"));
-        arrayList.add(new DeveloperData("Main UI Designer", "Luminon (http://itsuka.me)"));
+        arrayList.add(new DeveloperData("Main Programmer", "Kotohana", "@kotohana5706"));
+        arrayList.add(new DeveloperData("Main UI Designer", "Luminon", "@misaca_network"));
         adapter = new DeveloperListViewAdapter(this, arrayList);
         listView.setAdapter(adapter);
         listView.addHeaderView(header);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("asdf", position+"");
                 switch (position) {
-                    case 0:
-                        break;
-                    case 1:Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:kotohana5706@edcan.kr"));
-                        startActivity(Intent.createChooser(emailIntent, "이메일 전송"));
+                    case 1:
                         break;
                     case 2:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://edcan.kr")));
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:kotohana5706@edcan.kr"));
+                        startActivity(Intent.createChooser(emailIntent, "이메일 전송"));
                         break;
                     case 3:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://malang.moe")));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://edcan.kr")));
                         break;
                     case 4:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://itsuka.me")));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/kotohana5706")));
                         break;
                     case 5:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/misaca_network")));
                         break;
                 }
             }

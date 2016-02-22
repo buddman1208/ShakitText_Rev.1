@@ -3,6 +3,7 @@
     <color name="colorPrimary">#55ACEE</color>
     <color name="colorPrimaryDark">#3A8DCC</color>
     <color name="textColor">#757575</color>
+    <color name="textColorDark">#616161</color>
     <color name="textColorSub">#BDBDBD</color>
 
     <color name="blueThemeTitle">#55ACEE</color>

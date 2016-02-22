@@ -35,7 +35,6 @@ public class DeveloperListViewAdapter extends ArrayAdapter<DeveloperData> {
     public View getView(int position, View v, ViewGroup parent) {
         View view = null;
         if (v == null) {
-            // XML 레이아웃을 직접 읽어서 리스트뷰에 넣음
             view = mInflater.inflate(R.layout.developer_listview_content, null);
         } else {
             view = v;
@@ -43,10 +42,15 @@ public class DeveloperListViewAdapter extends ArrayAdapter<DeveloperData> {
         final DeveloperData data = this.getItem(position);
         if (data != null) {
             //화면 출력
-            TextView title = (TextView)view.findViewById(R.id.developer_listview_title);
-            TextView content = (TextView)view.findViewById(R.id.developer_listview_content);
+            TextView title = (TextView) view.findViewById(R.id.developer_listview_title);
+            TextView content = (TextView) view.findViewById(R.id.developer_listview_content);
+            TextView contentSub = (TextView) view.findViewById(R.id.developer_listview_content_sub);
             title.setText(data.getTitle());
             content.setText(data.getContent());
+            if (!(data.getSubContent() == null)) {
+                contentSub.setText(data.getSubContent());
+            } else contentSub.setVisibility(View.GONE);
+
         }
         return view;
     }
