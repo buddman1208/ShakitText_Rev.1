@@ -1,6 +1,10 @@
 package kr.edcan.shakittext.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +12,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.rey.material.widget.Switch;
 
 import java.util.ArrayList;
 
@@ -19,19 +28,30 @@ import kr.edcan.shakittext.adapter.MainListViewAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
+    View header;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
     ListView listView;
     MainListViewAdapter adatper;
     ArrayList<MainData> arrayList;
+    String[] themeName = {"트위터 블루", "느와르 핑크", "서티나인 민트", "소프트 핑크"};
+    int[] headerbg = {R.drawable.cardview_header_blue_bg, R.drawable.cardview_header_npink_bg, R.drawable.cardview_header_mint_bg, R.drawable.cardview_header_spink_bg};
+    int[] footerbg = {R.drawable.cardview_footer_blue_bg, R.drawable.cardview_footer_npink_bg, R.drawable.cardview_footer_mint_bg, R.drawable.cardview_footer_spink_bg};
+    int[] styles = {R.style.AppTheme_Blue, R.style.AppTheme_nPink, R.style.AppTheme_Mint, R.style.AppTheme_sPink};
+    int[] actionBarColor = {R.color.blueThemeTitle, R.color.noirPinkThemeTitle, R.color.mintThemeTitle, R.color.softPinkThemeTitle};
+    int[] actionBarColorDark = {R.color.blueThemeTitleDark, R.color.noirPinkThemeTitleDark, R.color.mintThemeTitleDark, R.color.softPinkThemeTitleDark};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         setActionBar();
+        pref = getSharedPreferences("ShakitText", 0);
+        editor = pref.edit();
+        setContentView(R.layout.activity_main);
         setDefault();
         setListView();
+        loadMainTheme(pref.getInt("theme", 0));
     }
-
 
     private void setActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -41,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     private void setDefault() {
         listView = (ListView) findViewById(R.id.main_listview);
         arrayList = new ArrayList<>();
-
     }
 
     private void setListView() {
@@ -61,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add(new MainData(3, "앱 정보 보기", "Shakit Text의 앱 정보를 확인합니다."));
         arrayList.add(new MainData(3, "튜토리얼 다시보기", "튜툐리얼을 다시한번 확인합니다."));
         adatper = new MainListViewAdapter(getApplicationContext(), arrayList);
-        View header = getLayoutInflater().inflate(R.layout.main_header, null);
+        header = getLayoutInflater().inflate(R.layout.main_header, null);
         EditText mainEdit = (EditText) header.findViewById(R.id.tweet_popup_edittext);
         mainEdit.setEnabled(false);
         mainEdit.setFocusable(false);
@@ -70,14 +89,29 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 2) {
+                if (position == 0) return;
+                else if (position == 2) {
                     // 계정
 
                 } else {
                     TextView title = (TextView) view.findViewById(R.id.main_listview_title);
+                    Switch sw = (Switch) view.findViewById(R.id.main_listview_right_switch);
+                    final TextView right = (TextView) view.findViewById(R.id.main_listview_right_text);
                     switch (title.getText().toString()) {
                         case "테마 설정":
-
+                            new MaterialDialog.Builder(MainActivity.this)
+                                    .title("테마 설정")
+                                    .items(themeName)
+                                    .itemsCallback(new MaterialDialog.ListCallback() {
+                                        @Override
+                                        public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                                            editor.putInt("theme", which);
+                                            editor.commit();
+                                            loadMainTheme(which);
+                                            right.setText(themeName[which]);
+                                        }
+                                    })
+                                    .show();
                             break;
                         case "흔들어 보내기":
                             break;
@@ -94,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                         case "앱 종료":
                             break;
                         case "앱 정보 보기":
-                             startActivity(new Intent(getApplicationContext(), DeveloperActivity.class));
+                            startActivity(new Intent(getApplicationContext(), DeveloperActivity.class));
                             break;
                         case "튜토리얼 다시보기":
                             break;
@@ -102,5 +136,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void loadMainTheme(int resValue) {
+        RelativeLayout headLayout = (RelativeLayout) header.findViewById(R.id.cardview_header);
+        LinearLayout footLayout = (LinearLayout) header.findViewById(R.id.cardview_footer);
+        headLayout.setBackgroundResource(headerbg[resValue]);
+        footLayout.setBackgroundResource(footerbg[resValue]);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(actionBarColor[resValue])));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            getWindow().setStatusBarColor(getResources().getColor(actionBarColorDark[resValue]));
     }
 }

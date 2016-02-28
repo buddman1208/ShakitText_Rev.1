@@ -7,12 +7,16 @@
     <color name="textColorSub">#BDBDBD</color>
 
     <color name="blueThemeTitle">#55ACEE</color>
+    <color name="blueThemeTitleDark">#3F7EAC</color>
     <color name="blueThemeBackground">#F5F5F5</color>
     <color name="noirPinkThemeTitle">#F06292</color>
+    <color name="noirPinkThemeTitleDark">#BA4F6F</color>
     <color name="noirPinkThemeBackground">#424242</color>
     <color name="mintThemeTitle">#26C6DA</color>
+    <color name="mintThemeTitleDark">#2296A7</color>
     <color name="mintThemeBackground">#424242</color>
     <color name="softPinkThemeTitle">#F48FB1</color>
+    <color name="softPinkThemeTitleDark">#C06F8B</color>
     <color name="softPinkThemeBackground">#F5F5F5</color>
     <color name="colorAccent">#FF4081</color>
 </resources>

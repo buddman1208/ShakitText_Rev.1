@@ -71,7 +71,7 @@ public class MainListViewAdapter extends ArrayAdapter<MainData> {
                         title.setText(data.getMainText());
                         content.setText(data.getSubText());
                         if (data.getMainText().equals("테마 설정")) {
-                            rightText.setText(themeType[sharedPreferences.getInt("themeType", 0)]);
+                            rightText.setText(themeType[sharedPreferences.getInt("theme", 0)]);
                         } else {
                             rightText.setText("감도 " + sharedPreferences.getInt("sensibility", 0));
                         }
