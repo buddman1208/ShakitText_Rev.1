@@ -1,4 +1,18 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
 
 android {
     compileSdkVersion 23
@@ -11,6 +25,7 @@ android {
         versionCode 1
         versionName "0.5"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,5 +46,11 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile('com.github.afollestad.material-dialogs:commons:0.8.5.5@aar') {
         transitive = true
+    }
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:retrofit-converters:2.0.0-beta4'
+    compile('com.twitter.sdk.android:twitter:1.13.1@aar') {
+        transitive = true;
     }
 }

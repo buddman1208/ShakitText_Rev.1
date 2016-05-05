@@ -30,7 +30,6 @@ public class DeveloperActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_developer);
-
         try {
             setDefault();
         } catch (PackageManager.NameNotFoundException e) {
@@ -55,7 +54,7 @@ public class DeveloperActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("asdf", position+"");
+                Log.e("asdf", position + "");
                 switch (position) {
                     case 1:
                         break;

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,16 +18,26 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.rey.material.widget.Switch;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
+import java.util.jar.Manifest;
 
 import kr.edcan.shakittext.R;
 import kr.edcan.shakittext.adapter.MainData;
 import kr.edcan.shakittext.adapter.MainListViewAdapter;
 
 public class MainActivity extends AppCompatActivity {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "9uydFgIgd9etUL91ojYPWWfjF";
+    private static final String TWITTER_SECRET = "lmA3gV9FoS76cQyTnc4rl320E8CWWzcQqMBorhdZcE21zL8kCe";
+
 
     View header;
     SharedPreferences pref;
@@ -44,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
         setActionBar();
         pref = getSharedPreferences("ShakitText", 0);
         editor = pref.edit();
@@ -92,7 +105,17 @@ public class MainActivity extends AppCompatActivity {
                 if (position == 0) return;
                 else if (position == 2) {
                     // 계정
-
+                    new MaterialDialog.Builder(MainActivity.this)
+                            .title("계정")
+                            .content("계정 설정을 시작합니다")
+                            .positiveText("시작")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                }
+                            })
+                            .show();
                 } else {
                     TextView title = (TextView) view.findViewById(R.id.main_listview_title);
                     Switch sw = (Switch) view.findViewById(R.id.main_listview_right_switch);
@@ -120,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         case "가로모드에서 사용":
                             break;
                         case "위젯 작동 제한":
+                            startActivity(new Intent(getApplicationContext(), SendActivity.class));
                             break;
                         case "부팅시 자동 실행":
                             break;

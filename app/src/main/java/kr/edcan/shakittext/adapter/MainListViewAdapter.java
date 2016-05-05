@@ -6,6 +6,7 @@ package kr.edcan.shakittext.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +62,8 @@ public class MainListViewAdapter extends ArrayAdapter<MainData> {
                 switch (data.getListType()) {
                     case 0:
                         profile.setVisibility(View.VISIBLE);
-                        profileChange.setVisibility(View.VISIBLE);
-                        title.setText(data.getHeaderTitle());
+                        rightText.setVisibility(View.VISIBLE);
+                        title.setText(data.getMainText());
                         content.setText(data.getSubText());
                         rightText.setText("변경");
                         break;

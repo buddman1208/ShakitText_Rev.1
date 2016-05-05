@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="right|center"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/main_listview_right_profile_change"
@@ -79,7 +79,7 @@
                 android:gravity="center"
                 android:text="asdf"
                 android:textColor="@color/textColorSub"
-                android:visibility="visible" />
+                android:visibility="gone" />
         </FrameLayout>
 
     </RelativeLayout>
